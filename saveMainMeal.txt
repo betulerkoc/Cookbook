@@ -1,3 +1,7 @@
-zeynpe = sd
-ayze = sdf
-betul = betul
+kale = sad
+main = mef
+hello = hello
+makarna = ds
+tavuk = ds
+z = sd
+asd = asd

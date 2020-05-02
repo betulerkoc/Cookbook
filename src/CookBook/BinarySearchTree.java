@@ -42,8 +42,7 @@ public class BinarySearchTree {
 				System.out.print("in order: " + root.recipe.getName() + "\r\n");
 				inorder(root.right);
 			}
-		
-		
+			
 		 public static String search(RecipeTree root, String st)
 		    {
 			 

@@ -34,7 +34,8 @@ public class CreateMenuPage extends JFrame{
 	JTextArea textAreaMain = new JTextArea();
 	
 	JButton btnChangeStarter = new JButton("Change it");
-	
+	JButton btnChangeMain = new JButton("Change it");
+	JButton btnChangeDessert = new JButton("Change it");
 	
 	public CreateMenuPage() {
 		getContentPane().setBackground(new Color(255, 222, 173));
@@ -61,7 +62,7 @@ public class CreateMenuPage extends JFrame{
 		
 		TitledBorder titleMain = new TitledBorder("Main Meal:");
 
-		textAreaDessert.setEditable (false);
+		textAreaMain.setEditable (false);
 		textAreaMain.setBounds(321, 81, 138, 218);
 		getContentPane().add(textAreaMain);
 		textAreaMain.setBorder(titleMain);
@@ -71,12 +72,10 @@ public class CreateMenuPage extends JFrame{
 		btnChangeStarter.setBounds(141, 49, 115, 29);
 		getContentPane().add(btnChangeStarter);
 		
-		JButton btnChangeDessert = new JButton("Change it");
 		btnChangeDessert.setBackground(new Color(255, 250, 205));
 		btnChangeDessert.setBounds(511, 49, 115, 29);
 		getContentPane().add(btnChangeDessert);
 		
-		JButton btnChangeMain = new JButton("Change it");
 		btnChangeMain.setBackground(new Color(255, 250, 205));
 		btnChangeMain.setBounds(331, 49, 115, 29);
 		getContentPane().add(btnChangeMain);
@@ -118,91 +117,96 @@ public class CreateMenuPage extends JFrame{
 		btnGoBack.setBounds(11, 16, 115, 51);
 		getContentPane().add(btnGoBack);
 			
-		textAreaStarter.setText ("");
-		textAreaDessert.setText("");
-		textAreaMain.setText("");
+		createRandomStarter();
+		createRandomMain();
+		createRandomDessert();
 	    
-		try {
-            FileReader reader = new FileReader("saveStarter.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
- 
-            String line;
- 
-            while ((line = bufferedReader.readLine()) != null) {
-            	//textAreaStarter.append(line + "\n");
-            }
-            reader.close();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		try {
-            FileReader reader = new FileReader("saveDessert.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
- 
-            String line;
- 
-            while ((line = bufferedReader.readLine()) != null) {
-            	textAreaDessert.append(line + "\n");
-            }
-            reader.close();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		try {
-            FileReader reader = new FileReader("saveMainMeal.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
- 
-            String line;
- 
-            while ((line = bufferedReader.readLine()) != null) {
-            	textAreaMain.append(line + "\n");
-            }
-            reader.close();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 	 
 		btnChangeStarter.addActionListener     (event -> changeStarter ());
+		btnChangeMain.addActionListener     (event -> changeMain ());
+		btnChangeDessert.addActionListener     (event -> changeDessert ());
 } 		
-
-	    
-	private void changeStarter() {
-		Random rand = new Random(); 
-		int rand_int1 = rand.nextInt(2);
-	//	System.out.print(rand_int1);
-		
-		//AddRecipePage.bst1.find(1);
-	//	textAreaStarter.append("");
-		
-		//System.out.print(AddRecipePage.bst1.getRoot().recipe.getName());
-		
-//		if(rand_int1 == AddRecipePage.bst1.getRoot().recipe.getId()) {
-//			System.out.print("name " + AddRecipePage.bst1.getRoot().recipe.getName());
-//			System.out.print("id " + rand_int1);
-//		}
 	
-		
-		//System.out.print(AddRecipePage.bst1.getSize() + "\r\n");
-		
-		
+	private void createRandomStarter() {
+
 		String alphabet= "abcdefghijklmnopqrstuvwxyz";
-        String s = "";
-        Random random = new Random();
-        
+	    String s = "";
+	    Random random = new Random();
+		
         for (int i = 0; i < 1; i++) {
             char c = alphabet.charAt(random.nextInt(26));
             s+=c;
         }
          
-        System.out.println("RANDOM " + s);
+        System.out.println("RANDOMSTARTER " + s);
 
-
-        String x = AddRecipePage.bst1.search(AddRecipePage.bst1.getRoot(), s);
-        textAreaStarter.append(x);
+        String randomStarter = Main.bstStarter.search(Main.bstStarter.getRoot(), s);
         
+        if(randomStarter != null)
+        textAreaStarter.append(randomStarter + "\n");
+        else
+        	createRandomStarter();	
+   
+	}
+
+	private void createRandomMain() {
+		
+		String alphabet= "abcdefghijklmnopqrstuvwxyz";
+	    String s = "";
+	    Random random = new Random();
+		
+        for (int i = 0; i < 1; i++) {
+            char c = alphabet.charAt(random.nextInt(26));
+            s+=c;
+        }
+         
+        System.out.println("RANDOMMAIN " + s);
+
+        String randomMain = Main.bstMainMeal.search(Main.bstMainMeal.getRoot(), s);
+        
+        if(randomMain != null)
+        textAreaMain.append(randomMain + "\n");
+        else
+        	createRandomMain();	
+  
+	}
+
+	
+	private void createRandomDessert() {
+		
+		String alphabet= "abcdefghijklmnopqrstuvwxyz";
+	    String s = "";
+	    Random random = new Random();
+		
+        for (int i = 0; i < 1; i++) {
+            char c = alphabet.charAt(random.nextInt(26));
+            s+=c;
+        }
+         
+        System.out.println("RANDOMDESSERT " + s);
+
+        String randomDessert = Main.bstDessert.search(Main.bstDessert.getRoot(), s);
+        
+        if(randomDessert != null)
+        	textAreaDessert.append(randomDessert + "\n");
+        else
+        	createRandomDessert();	
+   
+	}
+	
+	private void changeStarter() {
+		textAreaStarter.setText("");
+		createRandomStarter();
+	}
+	
+	
+	private void changeMain() {
+		textAreaMain.setText("");
+		createRandomMain();
+	}
+	private void changeDessert() {
+		textAreaDessert.setText("");
+		createRandomDessert();
 	}
 	
 }
