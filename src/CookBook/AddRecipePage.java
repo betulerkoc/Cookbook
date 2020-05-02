@@ -30,6 +30,9 @@ public class AddRecipePage extends JFrame{
 	JTextField txtRecipeName = new JTextField();
 	JTextArea txtRecipe = new JTextArea();
 	JComboBox<String> cmbRecipeType = new JComboBox<>();
+	JButton btnAddRecipe = new JButton("ADD!");
+	JButton btnGoBack = new JButton("Go Back");
+
 	
 	public AddRecipePage() {
 		getContentPane().setBackground(new Color(255, 228, 181));
@@ -39,14 +42,11 @@ public class AddRecipePage extends JFrame{
 		setSize(744, 547);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
-		
-				
 				
 	    JLabel lblHeader = new JLabel("ADD NEW RECIPE!");
 		lblHeader.setBounds(301, 37, 226, 27);
 		getContentPane().add(lblHeader);
 		lblHeader.setFont(new Font("Consolas", Font.PLAIN, 22));
-				
 				
 		JLabel lblRecipeName = new JLabel("Recipe Name: ");
 		getContentPane().add(lblRecipeName);
@@ -83,9 +83,9 @@ public class AddRecipePage extends JFrame{
 		lblRecipe.setHorizontalAlignment(JLabel.LEADING);
 		lblRecipe.setFont(new Font("Consolas", Font.PLAIN, 14));
 				
-		JButton btnAddRecipe = new JButton("ADD!");
 		btnAddRecipe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Recipe newRecipe = new Recipe(txtRecipeName.getText(), txtRecipe.getText(), cmbRecipeType.getSelectedItem().toString());
 				if(txtRecipeName.getText().isEmpty() ||
 						txtRecipe.getText().isEmpty() ||
 						cmbRecipeType.getSelectedIndex() == 0 ) {
@@ -93,12 +93,12 @@ public class AddRecipePage extends JFrame{
 					}
 						
 				else {
-					Recipe newRecipe = new Recipe(txtRecipeName.getText(), txtRecipe.getText(), cmbRecipeType.getSelectedItem().toString());
-					
 					if(newRecipe.getType() == "Starter") {
+						bst1.insert(newRecipe);
+						bst1.inorderTraversal();
 						try {
 						FileWriter writer = new FileWriter("saveStarter.txt", true);
-						writer.write(newRecipe.getName() + "-" +newRecipe.getRecipe()+ "-" + newRecipe.getType() + "\r\n");
+						writer.write(newRecipe.getName() + " = " +newRecipe.getRecipe()+ "\r\n");
 						writer.close();
 						}
 					catch(IOException e) {
@@ -107,35 +107,37 @@ public class AddRecipePage extends JFrame{
 						
 					} 
 					
-				else if(newRecipe.getType() == "Main Meal") {
-						try {
-						FileWriter writer = new FileWriter("saveMainMeal.txt", true);
-						writer.write(newRecipe.getName() + "-" +newRecipe.getRecipe()+ "-" + newRecipe.getType() + "\r\n");
-						writer.close();
-						}
-					catch(IOException e) {
-							e.printStackTrace();
-						}
-				}
-				else {
-					if(newRecipe.getType() == "Dessert") {
-						try {
-						FileWriter writer = new FileWriter("saveDessert.txt", true);
-						writer.write(newRecipe.getName() + "-" +newRecipe.getRecipe()+ "-" + newRecipe.getType() + "\r\n");
-						writer.close();
-						}
-					catch(IOException e) {
-							e.printStackTrace();
+					else if(newRecipe.getType() == "Main Meal") {
+						bst2.insert(newRecipe);
+						bst2.inorderTraversal();
+							try {
+							FileWriter writer = new FileWriter("saveMainMeal.txt", true);
+							writer.write(newRecipe.getName() + " = " +newRecipe.getRecipe()+ "\r\n");
+							writer.close();
+							}
+						catch(IOException e) {
+								e.printStackTrace();
+							}
+					}
+					else {
+						if(newRecipe.getType() == "Dessert") {
+							bst3.insert(newRecipe);
+							bst3.inorderTraversal();
+							try {
+							FileWriter writer = new FileWriter("saveDessert.txt", true);
+							writer.write(newRecipe.getName() + " = " +newRecipe.getRecipe()+ "\r\n");
+							writer.close();
+							}
+						catch(IOException e) {
+								e.printStackTrace();
+							}
 						}
 					}
-				}
 					
 				JOptionPane.showMessageDialog(null, "Recipe is added!");
 							
 						
 			}
-							
-					
 				txtRecipeName.setText("");
 				txtRecipe.setText("");
 				cmbRecipeType.setSelectedIndex(0);
@@ -155,9 +157,6 @@ public class AddRecipePage extends JFrame{
 		lblRecipeType.setHorizontalAlignment(JLabel.LEADING);
 		lblRecipeType.setFont(new Font("Consolas", Font.PLAIN, 14));
 				
-				
-				
-		JButton btnGoBack = new JButton("Go Back");
 		btnGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				WelcomePage welcomeWindow = new WelcomePage();
@@ -168,17 +167,6 @@ public class AddRecipePage extends JFrame{
 		btnGoBack.setBounds(29, 36, 117, 55);
 		getContentPane().add(btnGoBack);
 		
-		btnAddRecipe.addActionListener(event -> addNewRecipe ());
-		
 	}
 	
-	private void addNewRecipe() {
-		
-	Recipe recipe = new Recipe(txtRecipeName.getText(), txtRecipe.getText(), cmbRecipeType.getSelectedItem().toString() );
-	
-	bst1.insert(recipe);
-	
-	bst1.inorderTraversal();
-
-}
 }

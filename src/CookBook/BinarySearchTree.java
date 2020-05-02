@@ -17,7 +17,7 @@ public class BinarySearchTree {
 	      }
 	      else if (d.getName().compareTo(loc.recipe.getName()) > 0) {
 	         if (loc.right != null) loc = loc.right;
-	         else { loc.right = new RecipeTree(d); break; } 
+	         else { loc.right = new RecipeTree(d); break; }
 	      }
 	      else break;
 	   }

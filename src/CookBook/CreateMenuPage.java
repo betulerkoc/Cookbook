@@ -17,9 +17,21 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
 import java.awt.event.ActionEvent;
 
 public class CreateMenuPage extends JFrame{
+	
+	JTextArea textAreaStarter = new JTextArea();
+	JTextArea textAreaDessert = new JTextArea();
+	JTextArea textAreaMain = new JTextArea();
+	
 	
 	public CreateMenuPage() {
 		getContentPane().setBackground(new Color(255, 222, 173));
@@ -31,19 +43,22 @@ public class CreateMenuPage extends JFrame{
 		getContentPane().setLayout(null);
 		
 		TitledBorder titleStarter = new TitledBorder("Starter:");
-		JTextArea textAreaStarter = new JTextArea();
+
+		textAreaStarter.setEditable (false);
 		textAreaStarter.setBounds(131, 81, 138, 218);
 		getContentPane().add(textAreaStarter);
 		textAreaStarter.setBorder(titleStarter);
 		
 		TitledBorder titleDessert = new TitledBorder("Dessert:");
-		JTextArea textAreaDessert = new JTextArea();
+	
+		textAreaDessert.setEditable (false);
 		textAreaDessert.setBounds(501, 81, 138, 218);
 		getContentPane().add(textAreaDessert);
 		textAreaDessert.setBorder(titleDessert);
 		
 		TitledBorder titleMain = new TitledBorder("Main Meal:");
-		JTextArea textAreaMain = new JTextArea();
+
+		textAreaDessert.setEditable (false);
 		textAreaMain.setBounds(321, 81, 138, 218);
 		getContentPane().add(textAreaMain);
 		textAreaMain.setBorder(titleMain);
@@ -99,13 +114,78 @@ public class CreateMenuPage extends JFrame{
 		});
 		btnGoBack.setBounds(11, 16, 115, 51);
 		getContentPane().add(btnGoBack);
-		
-		
-		
-		
-		
+			
+		textAreaStarter.setText ("");
+		textAreaDessert.setText("");
+		textAreaMain.setText("");
+	    
+		try {
+            FileReader reader = new FileReader("saveStarter.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+ 
+            String line;
+ 
+            while ((line = bufferedReader.readLine()) != null) {
+            	textAreaStarter.append(line + "\n");
+            }
+            reader.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		try {
+            FileReader reader = new FileReader("saveDessert.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+ 
+            String line;
+ 
+            while ((line = bufferedReader.readLine()) != null) {
+            	textAreaDessert.append(line + "\n");
+            }
+            reader.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		try {
+            FileReader reader = new FileReader("saveMainMeal.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+ 
+            String line;
+ 
+            while ((line = bufferedReader.readLine()) != null) {
+            	textAreaMain.append(line + "\n");
+            }
+            reader.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	    	    
 	    
 	    
 	    
-	}
+	    
+	    
+	    
+	    
+//	    String sss="";
+//	    try {
+//	    	InputStreamReader reader = new InputStreamReader(
+//	    	        new FileInputStream("saveStarter.txt"), "UTF-8");
+//
+//		    sss = reader.t();
+//			reader.close();
+//			}
+//		catch(IOException e) {
+//				e.printStackTrace();
+//			}
+//	    for (int s = 0; s < 5; s++)
+//        {
+//	    	textAreaStarter.append(sss + "\n");
+//        }	
+//		
+} 		
+	    
+	
 }

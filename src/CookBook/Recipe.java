@@ -15,6 +15,10 @@ public class Recipe {
 		
 	}
 
+	public Recipe() {
+		super();
+	}
+
 	public String getName() {
 		return name;
 	}
