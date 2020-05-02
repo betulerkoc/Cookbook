@@ -94,8 +94,7 @@ public class AddRecipePage extends JFrame{
 						
 				else {
 					if(newRecipe.getType() == "Starter") {
-						bst1.insert(newRecipe);
-						bst1.inorderTraversal();
+	
 						try {
 						FileWriter writer = new FileWriter("saveStarter.txt", true);
 						writer.write(newRecipe.getName() + " = " +newRecipe.getRecipe()+ "\r\n");
@@ -104,12 +103,19 @@ public class AddRecipePage extends JFrame{
 					catch(IOException e) {
 							e.printStackTrace();
 						}
+
+						bst1.insert(newRecipe);
+						bst1.inorder(bst1.getRoot());
+						newRecipe.setId(bst1.getSize());
 						
+						//System.out.print(bst1.getSize() + "\r\n");
+						//System.out.print(bst1.getRoot().left + "\r\n");
+						System.out.print("iddd:" + newRecipe.getId() +  "\r\n");
 					} 
 					
 					else if(newRecipe.getType() == "Main Meal") {
 						bst2.insert(newRecipe);
-						bst2.inorderTraversal();
+					
 							try {
 							FileWriter writer = new FileWriter("saveMainMeal.txt", true);
 							writer.write(newRecipe.getName() + " = " +newRecipe.getRecipe()+ "\r\n");
@@ -122,7 +128,7 @@ public class AddRecipePage extends JFrame{
 					else {
 						if(newRecipe.getType() == "Dessert") {
 							bst3.insert(newRecipe);
-							bst3.inorderTraversal();
+						
 							try {
 							FileWriter writer = new FileWriter("saveDessert.txt", true);
 							writer.write(newRecipe.getName() + " = " +newRecipe.getRecipe()+ "\r\n");

@@ -4,8 +4,8 @@ public class RecipeTree {
 	   public Recipe recipe; 
 	   public RecipeTree left, right;
 	   
-	   public RecipeTree(Recipe d) { 
-	      recipe = d;
+	   public RecipeTree(Recipe newRecipe) { 
+	      recipe = newRecipe;
 	      left = right = null;
 	   }
 }

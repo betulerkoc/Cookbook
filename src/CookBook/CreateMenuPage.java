@@ -32,6 +32,8 @@ public class CreateMenuPage extends JFrame{
 	JTextArea textAreaDessert = new JTextArea();
 	JTextArea textAreaMain = new JTextArea();
 	
+	JButton btnChangeStarter = new JButton("Change it");
+	
 	
 	public CreateMenuPage() {
 		getContentPane().setBackground(new Color(255, 222, 173));
@@ -63,7 +65,7 @@ public class CreateMenuPage extends JFrame{
 		getContentPane().add(textAreaMain);
 		textAreaMain.setBorder(titleMain);
 		
-		JButton btnChangeStarter = new JButton("Change it");
+
 		btnChangeStarter.setBackground(new Color(255, 250, 205));
 		btnChangeStarter.setBounds(141, 49, 115, 29);
 		getContentPane().add(btnChangeStarter);
@@ -161,11 +163,11 @@ public class CreateMenuPage extends JFrame{
         } catch (IOException e) {
             e.printStackTrace();
         }
-	    	    
-	    
-	    
-	    
-	    
+		
+		
+		
+	//	AddRecipePage app = new AddRecipePage();
+		//bst1.inorder(bst1.getRoot());
 	    
 	    
 	    
@@ -185,7 +187,13 @@ public class CreateMenuPage extends JFrame{
 //	    	textAreaStarter.append(sss + "\n");
 //        }	
 //		
+		
+//		btnChangeStarter.addActionListener     (event -> changeStarter ());
 } 		
 	    
+//	private void changeStarter() {
+//		BinarySearchTree bst1 = new BinarySearchTree();
+//		bst1.inorder(bst1.getRoot());
+//	}
 	
 }

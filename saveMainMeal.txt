@@ -1,6 +1,3 @@
-hakan-ha-Main Meal
-ahs-aus-Main Meal
-betü-betül-Main Meal
-bet-bet-Main Meal
-ay-au-Main Meal
-2-2-Main Meal
+zeynpe = sd
+ayze = sdf
+betul = betul
