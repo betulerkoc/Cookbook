@@ -129,7 +129,7 @@ public class CreateMenuPage extends JFrame{
             String line;
  
             while ((line = bufferedReader.readLine()) != null) {
-            	textAreaStarter.append(line + "\n");
+            	//textAreaStarter.append(line + "\n");
             }
             reader.close();
  
@@ -164,31 +164,7 @@ public class CreateMenuPage extends JFrame{
         } catch (IOException e) {
             e.printStackTrace();
         }
-		
-		
-		
-	//	AddRecipePage app = new AddRecipePage();
-		//bst1.inorder(bst1.getRoot());
-	    
-	    
-	    
-//	    String sss="";
-//	    try {
-//	    	InputStreamReader reader = new InputStreamReader(
-//	    	        new FileInputStream("saveStarter.txt"), "UTF-8");
-//
-//		    sss = reader.t();
-//			reader.close();
-//			}
-//		catch(IOException e) {
-//				e.printStackTrace();
-//			}
-//	    for (int s = 0; s < 5; s++)
-//        {
-//	    	textAreaStarter.append(sss + "\n");
-//        }	
-//		
-		
+	 
 		btnChangeStarter.addActionListener     (event -> changeStarter ());
 } 		
 
@@ -196,18 +172,37 @@ public class CreateMenuPage extends JFrame{
 	private void changeStarter() {
 		Random rand = new Random(); 
 		int rand_int1 = rand.nextInt(2);
-		System.out.print(rand_int1);
+	//	System.out.print(rand_int1);
 		
-		AddRecipePage.bst1.find(rand_int1);
-		textAreaStarter.append("");
+		//AddRecipePage.bst1.find(1);
+	//	textAreaStarter.append("");
 		
-//			if(rand_int1 == AddRecipePage.bst1.getRoot().recipe.getId()) {
-//				System.out.print(AddRecipePage.bst1.getRoot().recipe.getName());
-//				System.out.print(rand_int1);
-//			}
+		//System.out.print(AddRecipePage.bst1.getRoot().recipe.getName());
+		
+//		if(rand_int1 == AddRecipePage.bst1.getRoot().recipe.getId()) {
+//			System.out.print("name " + AddRecipePage.bst1.getRoot().recipe.getName());
+//			System.out.print("id " + rand_int1);
+//		}
 	
 		
 		//System.out.print(AddRecipePage.bst1.getSize() + "\r\n");
+		
+		
+		String alphabet= "abcdefghijklmnopqrstuvwxyz";
+        String s = "";
+        Random random = new Random();
+        
+        for (int i = 0; i < 1; i++) {
+            char c = alphabet.charAt(random.nextInt(26));
+            s+=c;
+        }
+         
+        System.out.println("RANDOM " + s);
+
+
+        String x = AddRecipePage.bst1.search(AddRecipePage.bst1.getRoot(), s);
+        textAreaStarter.append(x);
+        
 	}
 	
 }
