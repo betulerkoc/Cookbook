@@ -24,6 +24,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 
 public class CreateMenuPage extends JFrame{
@@ -188,12 +189,25 @@ public class CreateMenuPage extends JFrame{
 //        }	
 //		
 		
-//		btnChangeStarter.addActionListener     (event -> changeStarter ());
+		btnChangeStarter.addActionListener     (event -> changeStarter ());
 } 		
+
 	    
-//	private void changeStarter() {
-//		BinarySearchTree bst1 = new BinarySearchTree();
-//		bst1.inorder(bst1.getRoot());
-//	}
+	private void changeStarter() {
+		Random rand = new Random(); 
+		int rand_int1 = rand.nextInt(2);
+		System.out.print(rand_int1);
+		
+		AddRecipePage.bst1.find(rand_int1);
+		textAreaStarter.append("");
+		
+//			if(rand_int1 == AddRecipePage.bst1.getRoot().recipe.getId()) {
+//				System.out.print(AddRecipePage.bst1.getRoot().recipe.getName());
+//				System.out.print(rand_int1);
+//			}
+	
+		
+		//System.out.print(AddRecipePage.bst1.getSize() + "\r\n");
+	}
 	
 }

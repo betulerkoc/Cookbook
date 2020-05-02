@@ -42,9 +42,40 @@ public class BinarySearchTree {
 				System.out.print("in order: " + root.recipe.getName() + "\r\n");
 				inorder(root.right);
 			}
-		}
+		
+		public void find(int id)
+		{
+			if (root == null) 
+				return;
+			//System.out.print(root.recipe.getName());
+			
+			else if(id == root.recipe.getId()) {
+				System.out.print(root.recipe.getName());
+			}
+			else if(id == root.left.recipe.getId()) {
+				System.out.print(root.left.recipe.getName());
+			}
+			}
+		
 
-	
+//		public static BinarySearchTree search(RecipeTree root, String st)
+//	    {
+//	        if(root == null) 
+//	        {
+//	            return null;
+//	        }
+//	        else if(st.equals(root.recipe.getName()))
+//	        {
+//	            return root;
+//	        }
+//	        else 
+//	        {   if (root.left!= null)
+//	                return search(root.left, st);
+//	            else
+//	                return search(root.left, st); 
+//	        }
+//	    }
+		}
 	
 	
 	

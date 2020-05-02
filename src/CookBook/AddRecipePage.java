@@ -23,9 +23,9 @@ import java.awt.event.ActionEvent;
 
 public class AddRecipePage extends JFrame{
 	
-	BinarySearchTree bst1 = new BinarySearchTree();
-	BinarySearchTree bst2 = new BinarySearchTree();
-	BinarySearchTree bst3 = new BinarySearchTree();
+	public static BinarySearchTree bst1 = new BinarySearchTree();
+	public static BinarySearchTree bst2 = new BinarySearchTree();
+	public static BinarySearchTree bst3 = new BinarySearchTree();
 	
 	JTextField txtRecipeName = new JTextField();
 	JTextArea txtRecipe = new JTextArea();
