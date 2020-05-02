@@ -121,26 +121,31 @@ public class CreateMenuPage extends JFrame{
 		createRandomMain();
 		createRandomDessert();
 	    
-	 
 		btnChangeStarter.addActionListener     (event -> changeStarter ());
 		btnChangeMain.addActionListener     (event -> changeMain ());
 		btnChangeDessert.addActionListener     (event -> changeDessert ());
 } 		
 	
-	private void createRandomStarter() {
-
+	public String createRandomChar() {
+		
+		String s = "";
+		
 		String alphabet= "abcdefghijklmnopqrstuvwxyz";
-	    String s = "";
+	    
 	    Random random = new Random();
 		
-        for (int i = 0; i < 1; i++) {
-            char c = alphabet.charAt(random.nextInt(26));
-            s+=c;
-        }
+	    for (int i = 0; i < 1; i++) {
+	      char c = alphabet.charAt(random.nextInt(26));
+	      s+=c;
+	    }
+        return s;
+	}
+	
+	private void createRandomStarter() {
          
-        System.out.println("RANDOMSTARTER " + s);
+        //System.out.println("RANDOMSTARTER " + this.createRandomChar());
 
-        String randomStarter = Main.bstStarter.search(Main.bstStarter.getRoot(), s);
+        String randomStarter = Main.bstStarter.search(Main.bstStarter.getRoot(), this.createRandomChar());
         
         if(randomStarter != null)
         textAreaStarter.append(randomStarter + "\n");
@@ -150,19 +155,10 @@ public class CreateMenuPage extends JFrame{
 	}
 
 	private void createRandomMain() {
-		
-		String alphabet= "abcdefghijklmnopqrstuvwxyz";
-	    String s = "";
-	    Random random = new Random();
-		
-        for (int i = 0; i < 1; i++) {
-            char c = alphabet.charAt(random.nextInt(26));
-            s+=c;
-        }
          
-        System.out.println("RANDOMMAIN " + s);
+       // System.out.println("RANDOMMAIN " + this.createRandomChar());
 
-        String randomMain = Main.bstMainMeal.search(Main.bstMainMeal.getRoot(), s);
+        String randomMain = Main.bstMainMeal.search(Main.bstMainMeal.getRoot(), this.createRandomChar());
         
         if(randomMain != null)
         textAreaMain.append(randomMain + "\n");
@@ -173,19 +169,10 @@ public class CreateMenuPage extends JFrame{
 
 	
 	private void createRandomDessert() {
-		
-		String alphabet= "abcdefghijklmnopqrstuvwxyz";
-	    String s = "";
-	    Random random = new Random();
-		
-        for (int i = 0; i < 1; i++) {
-            char c = alphabet.charAt(random.nextInt(26));
-            s+=c;
-        }
          
-        System.out.println("RANDOMDESSERT " + s);
+       // System.out.println("RANDOMDESSERT " + this.createRandomChar());
 
-        String randomDessert = Main.bstDessert.search(Main.bstDessert.getRoot(), s);
+        String randomDessert = Main.bstDessert.search(Main.bstDessert.getRoot(), this.createRandomChar());
         
         if(randomDessert != null)
         	textAreaDessert.append(randomDessert + "\n");

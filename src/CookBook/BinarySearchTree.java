@@ -48,6 +48,7 @@ public class BinarySearchTree {
 			 
 			// System.out.println("ONEMLI: " + root.recipe.getName());
 			// String ad = root.recipe.getName();
+			 System.out.println("RANDOM: " + st);
 		        if(root == null) 
 		        {
 		            return null;
