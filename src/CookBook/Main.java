@@ -127,7 +127,13 @@ public class Main {
 		createTrees();
 		WelcomePage welcomePage = new WelcomePage();
 		
-
+		System.out.println("-----Starter List----- ");
+		bstStarter.inorder(bstStarter.getRoot());
 		
+		System.out.println("-----Main List----- ");
+		bstMainMeal.inorder(bstMainMeal.getRoot());
+		
+		System.out.println("-----Dessert List----- ");
+		bstDessert.inorder(bstDessert.getRoot());
 	}
 }

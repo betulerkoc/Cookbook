@@ -39,7 +39,7 @@ public class BinarySearchTree {
 			if (root == null)
 				return;
 				inorder(root.left);
-				System.out.print("in order: " + root.recipe.getName() + "\r\n");
+				System.out.println("in order: " + root.recipe.getName());
 				inorder(root.right);
 			}
 			
