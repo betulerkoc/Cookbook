@@ -1,5 +1,6 @@
 package CookBook;
 
+import java.util.Random;
 
 public class BinarySearchTree {
 	private RecipeTree root;
@@ -43,15 +44,20 @@ public class BinarySearchTree {
 				inorder(root.right);
 			}
 			
+		
+
 		public static Recipe search(RecipeTree root, String st)
 	    {
-		 
-		 System.out.println("RANDOM: " + st);
+		
+		Random rand = new Random(); 
+	    int r = rand.nextInt(2); 
+		 System.out.println("RANDOM Char: " + st);
+		 System.out.println("RANDOM number: " +  r);
 	        if(root == null) 
 	        {
 	            return null;
 	        }
-	        else if(st.equals(root.recipe.getName().substring(0, 1)))
+	        else if(st.equals(root.recipe.getName().substring(r, r+1)))
 	        {
 	        	  System.out.println("sey helloooo");
 	            return root.recipe;

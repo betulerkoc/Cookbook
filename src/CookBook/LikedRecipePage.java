@@ -7,9 +7,15 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -26,6 +32,9 @@ import javax.swing.event.ListSelectionListener;
 
 public class LikedRecipePage extends JFrame{
 	
+	JList list = new JList(Main.likedList.toList());
+
+	
 	public LikedRecipePage() {
 	getContentPane().setBackground(new Color(255, 228, 181));
 	setTitle("Cook-Book");
@@ -35,7 +44,6 @@ public class LikedRecipePage extends JFrame{
 	setLocationRelativeTo(null);
 	getContentPane().setLayout(null);
 	
-	JList list = new JList(Main.likedList.toList());
 	getContentPane().add(list);
 	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	JScrollPane scroll = new JScrollPane(list);
@@ -86,11 +94,52 @@ public class LikedRecipePage extends JFrame{
 	btnDeleteRecipe.setBackground(new Color(135, 206, 250));
 	btnDeleteRecipe.setBounds(440, 157, 140, 47);
 	getContentPane().add(btnDeleteRecipe);
+	btnDeleteRecipe.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			String selectedRecipe = list.getSelectedValue().toString();
+			String removeTerm = list.getSelectedValue().toString();
+			Main.likedList.removeSelected(selectedRecipe);
+			removeRecord(filepath, removeTerm);
+			//Main.likedList.outputList();
+			getContentPane().add(list);
+			setVisible(false);
+			LikedRecipePage newWindow = new LikedRecipePage();
+			newWindow.setVisible(true);
+			JOptionPane.showMessageDialog(null, "Selected recipe is successfully deleted!");
+		}
+	});
 	
 	JButton btnClearList = new JButton("Clear List");
 	btnClearList.setBackground(new Color(135, 206, 250));
 	btnClearList.setBounds(444, 238, 136, 47);
 	getContentPane().add(btnClearList);
+	btnClearList.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+			FileOutputStream writer;
+			try {
+				writer = new FileOutputStream("saveLiked.txt");
+				writer.write(("").getBytes());
+				writer.close();
+				//Main.likedList.outputList();
+				Main.likedList.clearList();
+				setVisible(false);
+				LikedRecipePage newWindow = new LikedRecipePage();
+				newWindow.setVisible(true);
+				JOptionPane.showMessageDialog(null, "List is successfully cleared!");
+				list.clearSelection();
+				
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		}
+	});
 	
 	JButton btnGoBack = new JButton("Go Back");
 	btnGoBack.addActionListener(new ActionListener() {
@@ -108,5 +157,39 @@ public class LikedRecipePage extends JFrame{
 	lblListOfLiked.setBounds(167, 16, 282, 20);
 	getContentPane().add(lblListOfLiked);
 	
+	}
+	
+	String filepath = "saveLiked.txt";
+	private Scanner x;
+
+	public void removeRecord(String filepath, String removeTerm) 
+	{
+		String tempFile = "temp.txt";
+		File oldFile = new File(filepath);
+		File newFile = new File(tempFile);
+		String recipeName = "";
+		try {
+			FileWriter fw = new FileWriter(tempFile, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			x = new Scanner(new File(filepath));
+			while(x.hasNext()) {
+				recipeName = x.next();
+				if(!recipeName.equals(removeTerm))
+				{
+					pw.println(recipeName);
+				} 
+			}
+			x.close();
+			pw.flush();
+			pw.close();
+			oldFile.delete();
+			File dump = new File(filepath);
+			newFile.renameTo(dump);
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error!");
+		}
+
 	}
 }
