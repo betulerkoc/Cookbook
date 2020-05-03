@@ -43,28 +43,27 @@ public class BinarySearchTree {
 				inorder(root.right);
 			}
 			
-		 public static String search(RecipeTree root, String st)
-		    {
-			 
-			// System.out.println("ONEMLI: " + root.recipe.getName());
-			// String ad = root.recipe.getName();
-			 System.out.println("RANDOM: " + st);
-		        if(root == null) 
-		        {
-		            return null;
-		        }
-		        else if(st.equals(root.recipe.getName().substring(0, 1)))
-		        {
-		        	  System.out.println("sey helloooo");
-		            return root.recipe.getName();
-		        }
-		        else 
-		        {   if (root.left != null)
-		                return search(root.left, st);
-		            else
-		                return search(root.right, st); 
-		        }
-		    }
+		public static Recipe search(RecipeTree root, String st)
+	    {
+		 
+		 System.out.println("RANDOM: " + st);
+	        if(root == null) 
+	        {
+	            return null;
+	        }
+	        else if(st.equals(root.recipe.getName().substring(0, 1)))
+	        {
+	        	  System.out.println("sey helloooo");
+	            return root.recipe;
+	        }
+	        else 
+	        {   if (root.left != null)
+	                return search(root.left, st);
+	            else
+	                return search(root.right, st); 
+	        }
+	    }
+
 		
 		
 		

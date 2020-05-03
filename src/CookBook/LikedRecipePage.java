@@ -3,20 +3,31 @@ package CookBook;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollBar;
+import javax.swing.JTextArea;
+import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class LikedRecipePage extends JFrame{
 	
 	public LikedRecipePage() {
-		getContentPane().setBackground(new Color(255, 228, 181));
+	getContentPane().setBackground(new Color(255, 228, 181));
 	setTitle("Cook-Book");
 	setVisible(true);
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,11 +35,49 @@ public class LikedRecipePage extends JFrame{
 	setLocationRelativeTo(null);
 	getContentPane().setLayout(null);
 	
+	JList list = new JList(Main.likedList.toList());
+	getContentPane().add(list);
+	list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	JScrollPane scroll = new JScrollPane(list);
+	scroll = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scroll.setBounds(210, 72, 193, 213);
+    getContentPane().add(scroll);
+    	
 	JButton btnDetails = new JButton("See Details");
 	btnDetails.setBackground(new Color(135, 206, 250));
 	btnDetails.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-		}
+			String nameSelected = null;
+			String recipeSelected = null;
+			int index = list.getSelectedIndex();
+			if(index != -1) {
+				String name = list.getSelectedValue().toString();
+				Node selected = Main.likedList.find(name);
+				Recipe recipe = selected.recipe;
+				nameSelected = recipe.getName();
+				recipeSelected = recipe.getRecipe();
+				System.out.println(recipe.getName());
+				System.out.println(recipe.getRecipe());
+			}
+			else
+				JOptionPane.showMessageDialog(null, "Nothing has selected!");	
+			
+			SeeDetails seeDetailsPage = new SeeDetails();
+			JTextArea textArea = new JTextArea();
+			textArea.setEditable(false);
+			textArea.setLineWrap(true);
+			textArea.setWrapStyleWord(true);
+			
+			textArea.append(nameSelected + "\n");
+			textArea.append(recipeSelected + "\n");
+			
+			JScrollPane scroll = new JScrollPane(textArea);
+			scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		    scroll.setBounds(155, 38, 250, 200);
+		    getContentPane().add(scroll);
+		    seeDetailsPage.add(scroll);
+
+		}		
 	});
 	btnDetails.setBounds(440, 72, 140, 47);
 	getContentPane().add(btnDetails);
@@ -58,13 +107,6 @@ public class LikedRecipePage extends JFrame{
 	lblListOfLiked.setFont(new Font("Consolas", Font.BOLD, 22));
 	lblListOfLiked.setBounds(167, 16, 282, 20);
 	getContentPane().add(lblListOfLiked);
-	
-	JScrollPane scrollPane = new JScrollPane();
-	scrollPane.setBounds(198, 72, 162, 235);
-	getContentPane().add(scrollPane);
-	
-	JList list = new JList();
-	scrollPane.setRowHeaderView(list);
 	
 	}
 }

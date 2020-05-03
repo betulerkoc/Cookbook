@@ -16,6 +16,14 @@ public class LikedLinkedList {
 	public boolean isEmpty() {
 		return (first == null);
 	}
+	
+	public Node getFirst() {
+		return first;
+	}
+	
+	public Node getLast() {
+		return last;
+	}
 
 	public void insertAtFront(Recipe itemName) {
 		if(isEmpty())
@@ -23,19 +31,6 @@ public class LikedLinkedList {
 		else
 			first=new Node(itemName,first);
 		
-	}
-	
-	public void Insertion(Recipe value) {		
-		Node newNode = new Node(value);		
-		if(first == null){
-			first = newNode;
-		}else{
-			Node current = first;
-			while(current.getLink() != null){
-				current = current.link;
-			}
-			current.link = newNode;
-		}	
 	}
 	
 	public boolean removeSelected(String recipe) {
@@ -70,7 +65,7 @@ public class LikedLinkedList {
 	
 	}
 	
-	private Node find(String target) {
+	public Node find(String target) {
 		Node position = first;
 		String itemAtPosition;
 		while (position != null) {
